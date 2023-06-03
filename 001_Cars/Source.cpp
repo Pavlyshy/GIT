@@ -39,9 +39,10 @@ public:
     {
         for (const Car& car : cars)
         {
-            std::cout << "Name: " << car.name << ", Year: " << car.year
-                << ", Engine Volume: " << car.engineVolume
-                << ", Price: " << car.price << std::endl;
+            std::cout << "Name: " << car.name << std::endl;
+            std::cout<<"Year: " << car.year << std::endl;
+            std::cout << "Engine Volume : " << car.engineVolume << std::endl;
+            std::cout<<"Price: " << car.price << std::endl;
         }
     }
 
