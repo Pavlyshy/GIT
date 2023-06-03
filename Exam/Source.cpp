@@ -125,7 +125,7 @@ public:
 class Category {
 private:
     string name;
-    map<string, Test> tests;
+    vector<Test> tests;
 
 public:
     Category(const string& name) {
@@ -137,16 +137,18 @@ public:
     }
 
     void addTest(const string& testName, const Test& test) {
-        tests.emplace(testName, test);
+        tests.push_back(test);
     }
 
-    const map<string, Test>& getTests() const {
+    const vector<Test>& getTests() const {
         return tests;
     }
 
     const Test* getTest(const string& testName) const {
-        if (tests.find(testName) != tests.end()) {
-            return &(tests.at(testName));
+        for (const auto& test : tests) {
+            if (test.getName() == testName) {
+                return &test;
+            }
         }
         return nullptr;
     }
