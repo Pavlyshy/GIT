@@ -13,7 +13,7 @@ private:
     string fullName;
     string address;
     string phone;
-    map<string, int> testResults; // Ключ - назва тесту, значення - результат
+    map<string, int> testResults;
 
 public:
     User(const string& username, const string& password, const string& fullName, const string& address, const string& phone) {
@@ -274,7 +274,6 @@ int main() {
             cout << "Select an option:" << endl;
             cout << "1. Manage users" << endl;
             cout << "2. Conduct test" << endl;
-            cout << "3. View statistics" << endl;
             int choice;
             cin >> choice;
             switch (choice) {
@@ -350,17 +349,10 @@ int main() {
                     if (testChoice >= 1 && testChoice <= tests.size()) {
                         const Test& selectedTest = tests[testChoice - 1];
 
-                        // Виконання тесту
-                        // ...
-
                         break;
                     }
                 }
                 cout << "Invalid choice. Exiting..." << endl;
-                break;
-            case 3:
-                // Перегляд статистики
-                // ...
                 break;
             default:
                 cout << "Invalid choice. Exiting..." << endl;
@@ -368,7 +360,6 @@ int main() {
             }
         }
         else {
-            // Дії користувача
             cout << "Welcome, " << system.getUser(username)->getFullName() << "!" << endl;
             // Виконання операцій користувача (реєстрація, тестування, перегляд результатів)
             // ...
