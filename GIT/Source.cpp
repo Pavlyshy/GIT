@@ -7,6 +7,7 @@ class point {
 public:
 	point(){}
 	void print()const { cout << x << y << endl; }
+	void printX()const { cout << x << endl; }
 	void set(){}
 };
 
