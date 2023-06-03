@@ -4,15 +4,17 @@
 #include <fstream>
 #include <sstream>
 
+using namespace std;
+
 class Car
 {
 public:
-    std::string name;
+    string name;
     int year;
     float engineVolume;
     float price;
 
-    Car(const std::string& n, int y, float ev, float p)
+    Car(const string& n, int y, float ev, float p)
         : name(n), year(y), engineVolume(ev), price(p)
     {
     }
@@ -21,7 +23,7 @@ public:
 class CarShowroom
 {
 private:
-    std::vector<Car> cars;
+    vector<Car> cars;
 
 public:
     void addCar(const Car& car)
@@ -29,9 +31,9 @@ public:
         cars.push_back(car);
     }
 
-    void removeCar(const std::string& name)
+    void removeCar(const string& name)
     {
-        cars.erase(std::remove_if(cars.begin(), cars.end(),
+        cars.erase(remove_if(cars.begin(), cars.end(),
             [&](const Car& car) { return car.name == name; }), cars.end());
     }
 
@@ -39,44 +41,44 @@ public:
     {
         for (const Car& car : cars)
         {
-            std::cout << "Name: " << car.name << std::endl;
-            std::cout<<"Year: " << car.year << std::endl;
-            std::cout << "Engine Volume : " << car.engineVolume << std::endl;
-            std::cout<<"Price: " << car.price << std::endl;
+            cout << "Name: " << car.name << endl;
+            cout<<"Year: " << car.year << endl;
+            cout << "Engine Volume : " << car.engineVolume << endl;
+            cout<<"Price: " << car.price << endl;
         }
     }
 
     void sortCarsByYear()
     {
-        std::sort(cars.begin(), cars.end(),
+        sort(cars.begin(), cars.end(),
             [](const Car& a, const Car& b) { return a.year < b.year; });
     }
 
     void sortCarsByPrice()
     {
-        std::sort(cars.begin(), cars.end(),
+        sort(cars.begin(), cars.end(),
             [](const Car& a, const Car& b) { return a.price < b.price; });
     }
 
-    std::vector<Car> searchCarsByYear(int targetYear)
+    vector<Car> searchCarsByYear(int targetYear)
     {
-        std::vector<Car> result;
-        std::copy_if(cars.begin(), cars.end(), std::back_inserter(result),
+        vector<Car> result;
+        copy_if(cars.begin(), cars.end(), back_inserter(result),
             [&](const Car& car) { return car.year == targetYear; });
         return result;
     }
 
-    std::vector<Car> searchCarsByEngineVolume(float targetVolume)
+    vector<Car> searchCarsByEngineVolume(float targetVolume)
     {
-        std::vector<Car> result;
-        std::copy_if(cars.begin(), cars.end(), std::back_inserter(result),
+        vector<Car> result;
+        copy_if(cars.begin(), cars.end(), back_inserter(result),
             [&](const Car& car) { return car.engineVolume == targetVolume; });
         return result;
     }
 
-    void saveToFile(const std::string& filename)
+    void saveToFile(const string& filename)
     {
-        std::ofstream file(filename);
+        ofstream file(filename);
         if (file.is_open())
         {
             for (const Car& car : cars)
@@ -85,47 +87,47 @@ public:
                     << car.engineVolume << "," << car.price << "\n";
             }
             file.close();
-            std::cout << "Data saved to file: " << filename << std::endl;
+            cout << "Data saved to file: " << filename << endl;
         }
         else
         {
-            std::cerr << "Unable to open file: " << filename << std::endl;
+            cerr << "Unable to open file: " << filename << endl;
         }
     }
 
-    void loadFromFile(const std::string& filename)
+    void loadFromFile(const string& filename)
     {
-        std::ifstream file(filename);
+        ifstream file(filename);
         if (file.is_open())
         {
             cars.clear();
-            std::string line;
-            while (std::getline(file, line))
+            string line;
+            while (getline(file, line))
             {
-                std::istringstream iss(line);
-                std::string name;
-                std::string yearStr;
-                std::string engineVolumeStr;
-                std::string priceStr;
+                istringstream iss(line);
+                string name;
+                string yearStr;
+                string engineVolumeStr;
+                string priceStr;
 
-                if (std::getline(iss, name, ',') &&
-                    std::getline(iss, yearStr, ',') &&
-                    std::getline(iss, engineVolumeStr, ',') &&
-                    std::getline(iss, priceStr))
+                if (getline(iss, name, ',') &&
+                    getline(iss, yearStr, ',') &&
+                    getline(iss, engineVolumeStr, ',') &&
+                    getline(iss, priceStr))
                 {
-                    int year = std::stoi(yearStr);
-                    float engineVolume = std::stof(engineVolumeStr);
-                    float price = std::stof(priceStr);
+                    int year = stoi(yearStr);
+                    float engineVolume = stof(engineVolumeStr);
+                    float price = stof(priceStr);
 
                     cars.emplace_back(name, year, engineVolume, price);
                 }
             }
             file.close();
-            std::cout << "Data loaded from file: " << filename << std::endl;
+            cout << "Data loaded from file: " << filename << endl;
         }
         else
         {
-            std::cerr << "Unable to open file: " << filename << std::endl;
+            cerr << "Unable to open file: " << filename << endl;
         }
     }
 };
@@ -134,10 +136,9 @@ int main()
 {
     CarShowroom showroom;
 
-    // Зчитування даних з файлу (якщо існує)
     showroom.loadFromFile("car_data.txt");
 
-    int choice = 0;
+    int choice;
     while (choice != 9)
     {
         std::cout << "Menu:\n"
@@ -151,39 +152,39 @@ int main()
             << "8. Save Cars to File\n"
             << "9. Exit\n"
             << "Enter your choice: ";
-        std::cin >> choice;
+        cin >> choice;
 
         switch (choice)
         {
         case 1:
         {
-            std::string name;
+            string name;
             int year;
             float engineVolume;
             float price;
 
-            std::cout << "Enter car name: ";
-            std::cin.ignore();
-            std::getline(std::cin, name);
+            cout << "Enter car name: ";
+            cin.ignore();
+            getline(cin, name);
 
-            std::cout << "Enter year of manufacture: ";
-            std::cin >> year;
+            cout << "Enter year of manufacture: ";
+            cin >> year;
 
-            std::cout << "Enter engine volume: ";
-            std::cin >> engineVolume;
+            cout << "Enter engine volume: ";
+            cin >> engineVolume;
 
-            std::cout << "Enter price: ";
-            std::cin >> price;
+            cout << "Enter price: ";
+            cin >> price;
 
             showroom.addCar(Car(name, year, engineVolume, price));
             break;
         }
         case 2:
         {
-            std::string name;
-            std::cout << "Enter car name to remove: ";
-            std::cin.ignore();
-            std::getline(std::cin, name);
+            string name;
+            cout << "Enter car name to remove: ";
+            cin.ignore();
+            getline(std::cin, name);
 
             showroom.removeCar(name);
             break;
@@ -196,26 +197,26 @@ int main()
         case 4:
         {
             showroom.sortCarsByYear();
-            std::cout << "Cars sorted by year." << std::endl;
+            cout << "Cars sorted by year." << std::endl;
             break;
         }
         case 5:
         {
             showroom.sortCarsByPrice();
-            std::cout << "Cars sorted by price." << std::endl;
+            cout << "Cars sorted by price." << endl;
             break;
         }
         case 6:
         {
             int year;
-            std::cout << "Enter year to search: ";
-            std::cin >> year;
+            cout << "Enter year to search: ";
+            cin >> year;
 
-            std::vector<Car> cars = showroom.searchCarsByYear(year);
-            std::cout << "Cars found:" << std::endl;
+            vector<Car> cars = showroom.searchCarsByYear(year);
+            cout << "Cars found:" << endl;
             for (const Car& car : cars)
             {
-                std::cout << "Name: " << car.name << ", Year: " << car.year
+                cout << "Name: " << car.name << ", Year: " << car.year
                     << ", Engine Volume: " << car.engineVolume
                     << ", Price: " << car.price << std::endl;
             }
@@ -224,16 +225,16 @@ int main()
         case 7:
         {
             float volume;
-            std::cout << "Enter engine volume to search: ";
-            std::cin >> volume;
+            cout << "Enter engine volume to search: ";
+            cin >> volume;
 
-            std::vector<Car> cars = showroom.searchCarsByEngineVolume(volume);
-            std::cout << "Cars found:" << std::endl;
+            vector<Car> cars = showroom.searchCarsByEngineVolume(volume);
+            cout << "Cars found:" << endl;
             for (const Car& car : cars)
             {
-                std::cout << "Name: " << car.name << ", Year: " << car.year
+                cout << "Name: " << car.name << ", Year: " << car.year
                     << ", Engine Volume: " << car.engineVolume
-                    << ", Price: " << car.price << std::endl;
+                    << ", Price: " << car.price << endl;
             }
             break;
         }
@@ -244,12 +245,12 @@ int main()
         }
         case 9:
         {
-            std::cout << "Exiting program." << std::endl;
+            cout << "Exiting program." << endl;
             break;
         }
         default:
         {
-            std::cout << "Invalid choice. Please try again." << std::endl;
+            cout << "Invalid choice. Please try again." << endl;
             break;
         }
         }
