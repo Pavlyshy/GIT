@@ -40,8 +40,8 @@ public:
         return phone;
     }
 
-    void addTestResult(const string& testName, int result) {
-        testResults.emplace(testName, result);
+    map<string, int> getTestResults() const {
+        return testResults;
     }
 
     int getTestResult(const string& testName) const {
@@ -99,10 +99,6 @@ public:
 
         return count;
     }
-
-    /*double calculatePercentage(int correctAnswers) const {
-        return static_cast<double>(correctAnswers) / correctAnswers.size() * 100;
-    }*/
 
     int gradeTest(const vector<bool>& answers) const {
         int totalQuestions = questions.size();
@@ -351,24 +347,90 @@ int main() {
                     if (testChoice >= 1 && testChoice <= tests.size()) {
                         const Test& selectedTest = tests[testChoice - 1];
 
+                        vector<bool> userAnswers;
+                        for (int i = 0; i < selectedTest.getTotalQuestions(); i++) {
+                            cout << selectedTest.getQuestions()[i] << " (True/False): ";
+                            string answer;
+                            cin >> answer;
+                            transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
+                            if (answer == "true") {
+                                userAnswers.push_back(true);
+                            }
+                            else if (answer == "false") {
+                                userAnswers.push_back(false);
+                            }
+                            else {
+                                cout << "Invalid answer. Exiting..." << endl;
+                                return 0;
+                            }
+                        }
+
+                        int score = selectedTest.gradeTest(userAnswers);
+                        if (score == -1) {
+                            cout << "Invalid number of answers. Exiting..." << endl;
+                            return 0;
+                        }
+
+                        User* user = system.getUser(username);
+                        if (user) {
+                            user->addTestResult(selectedTest.getName(), score);
+                            cout << "Test results added for user '" << user->getUsername() << "'." << endl;
+                        }
+                    }
+                    else {
+                        cout << "Invalid test choice. Exiting..." << endl;
+                        return 0;
+                    }
+                }
+                else {
+                    cout << "Invalid category choice. Exiting..." << endl;
+                    return 0;
+                }
+
+                break;
+            default:
+                cout << "Invalid choice. Exiting..." << endl;
+
                         break;
                     }
                 }
-                cout << "Invalid choice. Exiting..." << endl;
+        else {
+        User* user = system.getUser(username);
+        if (user) {
+            cout << "Welcome, " << user->getFullName() << "!" << endl;
+
+            cout << "Select an option:" << endl;
+            cout << "1. View test results" << endl;
+
+            int userChoice;
+            cin >> userChoice;
+
+            switch (userChoice) {
+            case 1:
+                const map<string, int>&testResults = user->getTestResults();
+                if (testResults.empty()) {
+                    cout << "No test results found." << endl;
+                }
+                else {
+                    cout << "Test results:" << endl;
+                    for (const auto& entry : testResults) {
+                        cout << entry.first << ": " << entry.second << endl;
+                    }
+                }
                 break;
+
             default:
                 cout << "Invalid choice. Exiting..." << endl;
                 break;
             }
         }
         else {
-            cout << "Welcome, " << system.getUser(username)->getFullName() << "!" << endl;
-            // Виконання операцій користувача (реєстрація, тестування, перегляд результатів)
-            // ...
+            cout << "User not found. Exiting..." << endl;
+        }
         }
     }
     else {
-        cout << "Invalid username or password. Please try again." << endl;
+    cout << "Login failed. Exiting..." << endl;
     }
 
     return 0;
