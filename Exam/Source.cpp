@@ -55,8 +55,8 @@ public:
 class Test {
 private:
     string name;
-    vector<string> questions; // Список питань
-    vector<bool> correctAnswers; // Список правильних відповідей
+    vector<string> questions;
+    vector<bool> correctAnswers;
 
 public:
     Test(const string& name) {
@@ -68,16 +68,46 @@ public:
         correctAnswers.push_back(correctAnswer);
     }
 
-    // Додаткові методи для доступу до полів тесту
+    const string& getName() const {
+        return name;
+    }
+
+    const vector<string>& getQuestions() const {
+        return questions;
+    }
+
+    const vector<bool>& getAnswers() const {
+        return correctAnswers;
+    }
 
     int getTotalQuestions() const {
         return questions.size();
     }
 
+    int getCorrectAnswers(const vector<bool>& userAnswers) const {
+        if (userAnswers.size() != correctAnswers.size()) {
+            cout << "Invalid number of answers." << endl;
+            return -1;
+        }
+
+        int count = 0;
+        for (int i = 0; i < correctAnswers.size(); i++) {
+            if (userAnswers[i] == correctAnswers[i]) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    /*double calculatePercentage(int correctAnswers) const {
+        return static_cast<double>(correctAnswers) / correctAnswers.size() * 100;
+    }*/
+
     int gradeTest(const vector<bool>& answers) const {
         int totalQuestions = questions.size();
         if (answers.size() != totalQuestions) {
-            return -1; // Помилка: неправильна кількість відповідей
+            return -1;
         }
 
         int correctCount = 0;
@@ -95,7 +125,7 @@ public:
 class Category {
 private:
     string name;
-    map<string, Test> tests; // Ключ - назва тесту, значення - об'єкт тесту
+    map<string, Test> tests;
 
 public:
     Category(const string& name) {
@@ -106,13 +136,15 @@ public:
         tests.emplace(testName, test);
     }
 
-    // Додаткові методи для доступу до полів категорії та тестів
+    const map<string, Test>& getTests() const {
+        return tests;
+    }
 
     const Test* getTest(const string& testName) const {
         if (tests.find(testName) != tests.end()) {
             return &(tests.at(testName));
         }
-        return nullptr; // Тест не знайдено
+        return nullptr;
     }
 };
 
@@ -121,8 +153,8 @@ private:
     string adminUsername;
     string adminPassword;
     User admin;
-    map<string, User> users; // Ключ - логін користувача, значення - об'єкт користувача
-    vector<Category> categories; // Список категорій
+    map<string, User> users;
+    vector<Category> categories;
 
 public:
     TestingSystem(const string& adminUsername, const string& adminPassword) : admin(adminUsername, adminPassword, "", "", "") {
@@ -142,15 +174,15 @@ public:
 
     bool login(const string& username, const string& password) {
         if (username == adminUsername && password == adminPassword) {
-            return true; // Вхід адміністратора
+            return true;
         }
 
         auto it = users.find(username);
         if (it != users.end() && it->second.getPassword() == password) {
-            return true; // Вхід користувача
+            return true;
         }
 
-        return false; // Помилка входу
+        return false;
     }
 
     User* getUser(const string& username) {
@@ -163,29 +195,33 @@ public:
             return &(it->second);
         }
 
-        return nullptr; // Користувача не знайдено
+        return nullptr;
     }
 
     void addCategory(const Category& category) {
         categories.push_back(category);
     }
 
-    // Додаткові методи для доступу до користувачів, категорій та адміністратора
+    const vector<Category>& getCategories() const {
+        return categories;
+    }
 
-    // Додаткові методи для виконання операцій адміністратора (управління користувачами, тестуванням, статистикою)
+    User& getAdmin() {
+        return admin;
+    }
 
-    // Додаткові методи для виконання операцій гостя (реєстрація, тестування, перегляд результатів)
+    const User& getAdmin() const {
+        return admin;
+    }
 
+    const map<string, User>& getUsers() const {
+        return users;
+    }
 };
 
 int main() {
     TestingSystem system("admin", "adminpassword");
 
-    // Додавання категорій, тестів, запитань до системи
-
-    // Реєстрація користувачів
-
-    // Вхід в систему, виконання дій користувача
-
+    
     return 0;
 }
