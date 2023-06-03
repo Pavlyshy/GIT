@@ -40,15 +40,12 @@ public:
         return phone;
     }
 
-    map<string, int> getTestResults() const {
-        return testResults;
+    void addTestResult(const string& testName, int result) {
+        testResults.emplace(testName, result);
     }
 
-    int getTestResult(const string& testName) const {
-        if (testResults.find(testName) != testResults.end()) {
-            return testResults.at(testName);
-        }
-        return -1;
+    map<string, int> getTestResults() const {
+        return testResults;
     }
 };
 
