@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GIT", "GIT\GIT.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "001_Cars", "001_Cars\001_Cars.vcxproj", "{F76EA38D-EF97-4503-9E99-7DDA4C99B734}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exam", "Exam\Exam.vcxproj", "{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x64.Build.0 = Release|x64
 		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x86.ActiveCfg = Release|Win32
 		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x86.Build.0 = Release|Win32
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Debug|x64.ActiveCfg = Debug|x64
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Debug|x64.Build.0 = Debug|x64
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Debug|x86.ActiveCfg = Debug|Win32
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Debug|x86.Build.0 = Debug|Win32
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Release|x64.ActiveCfg = Release|x64
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Release|x64.Build.0 = Release|x64
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Release|x86.ActiveCfg = Release|Win32
+		{6BAB71F5-A626-4C8D-AEEC-5468CE972A0B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
