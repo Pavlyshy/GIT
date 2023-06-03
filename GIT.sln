@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GIT", "GIT\GIT.vcxproj", "{FED38C44-80F2-4A25-8316-2CB215F72828}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "001_Cars", "001_Cars\001_Cars.vcxproj", "{F76EA38D-EF97-4503-9E99-7DDA4C99B734}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{FED38C44-80F2-4A25-8316-2CB215F72828}.Release|x64.Build.0 = Release|x64
 		{FED38C44-80F2-4A25-8316-2CB215F72828}.Release|x86.ActiveCfg = Release|Win32
 		{FED38C44-80F2-4A25-8316-2CB215F72828}.Release|x86.Build.0 = Release|Win32
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Debug|x64.ActiveCfg = Debug|x64
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Debug|x64.Build.0 = Debug|x64
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Debug|x86.ActiveCfg = Debug|Win32
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Debug|x86.Build.0 = Debug|Win32
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x64.ActiveCfg = Release|x64
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x64.Build.0 = Release|x64
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x86.ActiveCfg = Release|Win32
+		{F76EA38D-EF97-4503-9E99-7DDA4C99B734}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

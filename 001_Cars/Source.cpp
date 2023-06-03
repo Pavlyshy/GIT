@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 
 class Car
 {
@@ -102,15 +103,19 @@ public:
             {
                 std::istringstream iss(line);
                 std::string name;
-                int year;
-                float engineVolume;
-                float price;
+                std::string yearStr;
+                std::string engineVolumeStr;
+                std::string priceStr;
 
                 if (std::getline(iss, name, ',') &&
-                    std::getline(iss, line, ',') && std::stringstream(line) >> year &&
-                    std::getline(iss, line, ',') && std::stringstream(line) >> engineVolume &&
-                    std::getline(iss, line) && std::stringstream(line) >> price)
+                    std::getline(iss, yearStr, ',') &&
+                    std::getline(iss, engineVolumeStr, ',') &&
+                    std::getline(iss, priceStr))
                 {
+                    int year = std::stoi(yearStr);
+                    float engineVolume = std::stof(engineVolumeStr);
+                    float price = std::stof(priceStr);
+
                     cars.emplace_back(name, year, engineVolume, price);
                 }
             }
